@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const secret = "Everyone lies";
 
-const admin = (req, res, next) => {
+const coach = (req, res, next) => {
 
     try {
         if(!req.headers.authorization){
@@ -22,4 +22,4 @@ const admin = (req, res, next) => {
     }
 }
 
-module.exports = admin;
+module.exports = coach;

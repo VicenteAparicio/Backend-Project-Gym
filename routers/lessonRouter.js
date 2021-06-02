@@ -2,6 +2,7 @@ const router = require('express').Router();
 const chatController = require('../controller/lessonController');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
+const coach = require('../middleware/coach');
 const jwt = require('jsonwebtoken');
 
 router.get('/alllessons', admin, async (req, res) => {
@@ -14,7 +15,7 @@ router.get('/alllessons', admin, async (req, res) => {
     }
 });
 
-router.post('/newlesson',  async (req, res) => {
+router.post('/newlesson', coach, async (req, res) => {
     try {
         const room = req.body;
         res.json(await chatController.newRoom(room));
@@ -25,7 +26,7 @@ router.post('/newlesson',  async (req, res) => {
     }
 });
 
-router.post('/joinlesson', async (req,res) => {
+router.post('/joinlesson', auth, async (req,res) => {
     try{
         const data = req.body;
         res.json(await chatController.joinRoom(data));
@@ -36,7 +37,7 @@ router.post('/joinlesson', async (req,res) => {
     }
 });
 
-router.post('/leavelesson', async (req,res) => {
+router.post('/leavelesson', auth, async (req,res) => {
     try{
         const data = req.body;
         res.json(await chatController.leaveRoom(data));
@@ -47,7 +48,7 @@ router.post('/leavelesson', async (req,res) => {
     }
 });
 
-router.post('/addmessage', async (req,res) => {
+router.post('/addmessage', auth, async (req,res) => {
     try{
         const data = req.body;
         res.json(await chatController.addMessage(data));

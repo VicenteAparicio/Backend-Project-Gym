@@ -4,9 +4,13 @@ const Schema = mongoose.Schema;
 
 
 const lessonSchema = new Schema({
-    name: {
+    title: {
         type: String,
         required: true
+    },
+    coach: {
+        type: String,
+        required: true,
     },
     creationDate: {
         type: Date,

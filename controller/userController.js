@@ -57,7 +57,8 @@ class Customer {
                 city : body.city,
                 country : body.country,
                 idAdmin : body.isAdmin,
-                email : body.email  },
+                email : body.email,
+                isCoach: body.isCoach  },
             {   new: true,
                 omiteUndefined:true }
         );
