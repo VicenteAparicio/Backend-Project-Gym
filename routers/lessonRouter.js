@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const chatController = require('../controllers/chatController');
+const chatController = require('../controller/lessonController');
 
 router.get('/alllessons', async (req, res) => {
     try {

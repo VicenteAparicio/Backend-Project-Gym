@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const userController = require('../controllers/userController');
+const userController = require('../controller/userController');
 const jwt = require('jsonwebtoken');
 
 router.post('/login', async (req, res) => {
