@@ -5,6 +5,13 @@ const secret = "Everyone lies";
 
 class Customer {
 
+    // NEW USER
+    async newUser(user){
+        user.password = await bcrypt.hashSync(user.password, 10);
+        return User.create(user);
+    }   
+
+    // LOGIN
     async login(email,password){
         const user = await User.findOne({email});
         if(!user){
@@ -24,33 +31,52 @@ class Customer {
         return ({token, user});
     }
 
-    async delete(body){
-        let id = body.id;
-        return User.findByIdAndDelete({_id: id});
-    }
-
+    // MODIFY USER BY USER
     async modifyUser(body){
         return User.findByIdAndUpdate(
             {_id: body.id},
             {   nick : body.nick,
                 name : body.name,
-                city : body.city  },
+                birthdate : body.birthdate,
+                password : body.password,
+                city : body.city,
+                country : body.country  },
             {   new: true,
                 omiteUndefined:true }
         );
     }
 
-        async allUsers(){
-            return User.find({isAdmin:true});
-        }
+    // MODIFY USER BY ADMIN
+    async modifyUser(body){
+        return User.findByIdAndUpdate(
+            {_id: body.id},
+            {   nick : body.nick,
+                name : body.name,
+                birthdate : body.birthdate,
+                password : body.password,
+                city : body.city,
+                country : body.country,
+                idAdmin : body.isAdmin,
+                email : body.email  },
+            {   new: true,
+                omiteUndefined:true }
+        );
+    }
 
-        async newUser(user){
-            user.password = await bcrypt.hashSync(user.password, 10);
-            return User.create(user);
-        }    
+
+    // DELETE USER
+    async delete(body){
+        let id = body.id;
+        return User.findByIdAndDelete({_id: id});
+    }
+
+
+    // FIND ALL USERS (ADMIN ONLY)
+    async allUsers(){
+        return User.find({isAdmin:true});
+    }
+    
 }
-
-
 
 const userController = new Customer();
 module.exports = userController;

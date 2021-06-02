@@ -1,9 +1,11 @@
 const router = require('express').Router();
 const chatController = require('../controller/lessonController');
+const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
+const jwt = require('jsonwebtoken');
 
-router.get('/alllessons', async (req, res) => {
+router.get('/alllessons', admin, async (req, res) => {
     try {
-        
         res.json(await chatController.allRooms());
     } catch (err) {
         return res.status(500).json({
@@ -12,7 +14,7 @@ router.get('/alllessons', async (req, res) => {
     }
 });
 
-router.post('/newlesson', async (req, res) => {
+router.post('/newlesson',  async (req, res) => {
     try {
         const room = req.body;
         res.json(await chatController.newRoom(room));

@@ -6,11 +6,10 @@ const auth = (req, res, next) => {
 
     try {
         if(!req.headers.authorization){
-            return new Error("No tienes autorización");
+            throw new Error("Access denied");
         }
 
         let token = req.headers.authorization.split(' ')[1];
-        console.log("Este es el primer " + token)
         let auth = jwt.verify(token,secret);
 
         if (auth.isAdmin == true){
