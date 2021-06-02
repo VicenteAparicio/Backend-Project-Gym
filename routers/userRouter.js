@@ -42,6 +42,7 @@ router.get('/allusers', auth, async (req, res) => {
     }
 });
 
+
 router.post('/newuser', async (req, res) => {
     try {
         let user = req.body;
