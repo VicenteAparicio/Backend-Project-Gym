@@ -4,6 +4,8 @@ const lessonRouter = require('./router/lessonRouter');
 
 
 router.use('/user', userRouter);
-router.use('/chat', lessonRouter);
+router.use('/lesson', lessonRouter);
+
+console.log("Estamos en el router.js")
 
 module.exports = router;

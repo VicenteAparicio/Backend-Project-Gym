@@ -1,10 +1,10 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const auth = require('../middleware/auth');
 const secret = "Evryone lies";
 
 class Customer {
-
 
     async login(email,password){
         const user = await User.findOne({email});
@@ -36,17 +36,14 @@ class Customer {
         );
     }
 
-    async allUsers(){
-        return User.find();
-    }
+        async allUsers(){
+            return User.find();
+        }
 
-    async newUser(user){
-        let password = user.password;
-        user.password = bcrypt.hashSync(password, 10);
-        return User.create(user);
-    }
-
-
+        async newUser(user){
+            user.password = await bcrypt.hashSync(user.password, 10);
+            return User.create(user);
+        }    
 }
 
 
