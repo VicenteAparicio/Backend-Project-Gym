@@ -6,5 +6,5 @@ const port = 3000;
 app.use(express.json());
 
 db.then(() => (
-    app.listen(port, () => console.log(`Node server runing on http://localhost:${port}`))
+    app.listen(port, () => console.log(`Node server running on http://localhost:${port}`))
 )).catch((error) => console.log(error));
