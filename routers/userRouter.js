@@ -1,7 +1,10 @@
 const router = require('express').Router();
 const userController = require('../controller/userController');
+const auth = require('../middleware/auth');
 const jwt = require('jsonwebtoken');
 
+
+// LOGIN
 router.post('/login', async (req, res) => {
     try {
         const {email,password} = req.body;
@@ -16,7 +19,20 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.get('/allusers', async (req, res) => {
+// DELETE USER
+router.delete('/delete', async (req, res) => {
+    try {
+        const body = req.body;
+        res.json(await userController.delete(body));
+    } catch (err) {
+        return res.status(500).json({
+            mesaje: err.message
+        });
+    }
+});
+
+// FIND ALL USERS
+router.get('/allusers', auth, async (req, res) => {
     try {
         res.json(await userController.allUsers());
     } catch (err) {

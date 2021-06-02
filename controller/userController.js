@@ -1,8 +1,7 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const auth = require('../middleware/auth');
-const secret = "Evryone lies";
+const secret = "Everyone lies";
 
 class Customer {
 
@@ -25,6 +24,11 @@ class Customer {
         return ({token, user});
     }
 
+    async delete(body){
+        let id = body.id;
+        return User.findByIdAndDelete({_id: id});
+    }
+
     async modifyUser(body){
         return User.findByIdAndUpdate(
             {_id: body.id},
@@ -37,7 +41,7 @@ class Customer {
     }
 
         async allUsers(){
-            return User.find();
+            return User.find({isAdmin:true});
         }
 
         async newUser(user){
