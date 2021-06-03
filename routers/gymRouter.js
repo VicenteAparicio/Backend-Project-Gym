@@ -25,6 +25,16 @@ router.get('/all_gyms', async (req, res) => {
         });
     }
 });
+// NEW GYM
+router.get('/new_gym', admin, async (req, res) => {
+    try {
+        res.json(await gymController.newGym());
+    } catch (err) {
+        return res.status(500).json({
+            mensaje: err.message
+        });
+    }
+});
 
 // MODIFY GYM DATA
 router.put('/modify_gym', admin, async (req, res) => {
