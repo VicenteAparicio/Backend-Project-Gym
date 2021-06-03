@@ -35,9 +35,12 @@ const coachSchema = new Schema({
     special: {
         type: String,
     },
-    lessons: {
-        type: Array,
-    },
+    lessons: [{
+        type: mongoose.Schema.Types.ObjectId, ref: "Lesson"
+    }],
+    // lessons: {
+    //     type: Array,
+    // },
     birthdate: {
         type: Date,
         required: true

@@ -8,7 +8,7 @@ class Room {
 
 
         async allLessons(){
-            return Lesson.find({});
+            return Lesson.find().populate('coaches');
         }
 
         async newLesson(body){
