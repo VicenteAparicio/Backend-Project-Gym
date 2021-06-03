@@ -27,11 +27,23 @@ The aim of the project was to develop an only-backend service for the management
     * Sign Up Endpoint
     * Log In Endpoint
     * Log Out Endpoint
+    * Delete user Endpoint
     * Extra features: Use of JWT and bCrypt; Admin, Trainer and Client roles
-* Appointments Managament
-    * List All Appointments Endpoint (Both by Admin and by each Trainer)
-    * Make an Appointment Endpoint (Choosing a Trainer/Gym)
-    * Cancel an Appointment Endpoint
+* Coachs Managament
+    * New Coach Endpoint
+    * Modify Profile Coach Endpoint
+    * Find All Profile Coach Endpoint
+* Lessons Management
+    * New Lesson Endpoint 
+        * Lessons are related to Coach
+        * Client Join Lesson Endpoint
+        * Client Leave Lesson Endpoint
+        * Client can add a comment Lesson Endpoint
+* Gym Locals Management
+    * Find All Gym Locals Endpoint
+    * Gym Locals are related to Lessons
+* Data Managemente
+    * ORM use (Sequelize/MongoDB/MySQL)
 
 The technologies we used were: <br> <br>
 ![Visual Studio Code](https://code.visualstudio.com/assets/favicon.ico)
@@ -51,14 +63,23 @@ The technologies we used were: <br> <br>
 ### index.js
 ```
 const express = require('express');
+const router = require('./router')
+const db = require('./config/mongoose')
 const app = express();
 const port = 3000;
-const router = require('./router');
+const cors = require('cors');
 
-app.use(router);
+
+// MIDDLEWARE
 app.use(express.json());
+app.use(cors());
+app.use(router);
 
-app.listen(port, () => console.log(`Node server running on http://localhost:${port}`));
+
+db.then(() => (
+    app.listen(port, () => console.log(`Node server runing on http://localhost:${port}`))
+))
+.catch((error) => console.log(error));
 
 ```
 
@@ -76,18 +97,22 @@ Then, the router.js' and express.json()' functionalities were "used", or, we ass
 ### router.js
 ```
 const router = require('express').Router();
+const userRouter = require('./routers/userRouter');
+const lessonRouter = require('./routers/lessonRouter');
+const coachRouter = require('./routers/coachRouter');
+const gymRouter = require('./routers/gymRouter');
 
-const moviesRouter = require('./routes/moviesRouter.js');
-const seriesRouter = require('./routes/seriesRouter.js');
 
-router.use('/movies', moviesRouter);
-router.use('/series', seriesRouter);
+router.use('/user', userRouter);
+router.use('/lesson', lessonRouter);
+router.use('/coach', coachRouter);
+router.use('/gym', gymRouter);
 
 
 module.exports = router;
 
 ```
-This js file **imports the .Router() utility from Express.js**, which is used to **link the moviesRouter, customerRouter, orderRouter and loginRouter paths, and therefore their content, to index.js**. In this sense, **router.js is merely a link between the main application (index.js) to its dependencies.**
+This js file **imports the .Router() utility from Express.js**, which is used to **link the userRouter, lessonRouter, coachRouter and gymRouter paths, and therefore their content, to index.js**. In this sense, **router.js is merely a link between the main application (index.js) to its dependencies.**
 
 
 
@@ -120,16 +145,22 @@ El objetivo del proyecto es desarrollar un servicio (solo la parte backend) para
     * Endpoint para Darse de Alta
     * Endpoint para Iniciar Sesión
     * Endpoint para Cerrar Sesión
+    * Endpoint para Eliminar usuario
     * Características extra: Uso de JWT, bCrypt; funciones de ADMIN, Trainer y Cliente
-* Gestión de Citas
-    * Endpoint para Búsqueda por Título
-    * Endpoint para buscar por Id
-    * Endpoint para Mostrar todas las Películas
-* Gestión de los Pedidos
-    * Endpoint para Crear un Pedido
-        * Una única Película por Cliente
-        * Fechas de Recepción y de Devolución
-    * Características extra: Mostrar todos los Pedidos (solo para el Admin)
+* Gestión de Coachs
+    * Endpoint para Nuevo Coach
+    * Endpoint para Modificar el perfil de Coach
+    * Endpoint para Ver todos los Coachs
+* Gestión de las sesiones de entrenamiento
+    * Endpoint para Crear una sesión de entrenamiento
+        * La sesión de entrenamiento está relacionada con un coach
+        * Endpoint para que el cliente pueda Añadirse a la sesión de entrenamiento
+        * Endpoint para que el cliente pueda Quitarse de la sesión de entrenamiento
+        * Endpoint para que el cliente pueda añadir un comentario en la sesión de entrenamiento
+    * Endpoint para ver todas las sesiones de entrenamientos
+* Gestión de los locales
+    * Endpoint para Ver todos los locales
+    * Los locales están relacionados con las sesiones de entrenamiento
 * Gestión de Datos
     * Emplear un ORM (Sequelize/MongoDB/MySQL)
 
@@ -149,14 +180,21 @@ Las tecnologías empleadas fueron: <br> <br>
 ### index.js
 ```
 const express = require('express');
+const router = require('./router')
+const db = require('./config/mongoose')
 const app = express();
 const port = 3000;
-const router = require('./router');
+const cors = require('cors');
 
-app.use(router);
+
 app.use(express.json());
+app.use(cors());
+app.use(router);
 
-app.listen(port, () => console.log(`Node server running on http://localhost:${port}`));
+db.then(() => (
+    app.listen(port, () => console.log(`Node server runing on http://localhost:${port}`))
+))
+.catch((error) => console.log(error));
 
 ```
 
@@ -179,19 +217,23 @@ Entonces, las herramientras de router.js y de express.json fueron "usadas", o, a
 ### router.js
 ```
 const router = require('express').Router();
+const userRouter = require('./routers/userRouter');
+const lessonRouter = require('./routers/lessonRouter');
+const coachRouter = require('./routers/coachRouter');
+const gymRouter = require('./routers/gymRouter');
 
-const moviesRouter = require('./routes/moviesRouter.js');
-const seriesRouter = require('./routes/seriesRouter.js');
 
-router.use('/movies', moviesRouter);
-router.use('/series', seriesRouter);
+router.use('/user', userRouter);
+router.use('/lesson', lessonRouter);
+router.use('/coach', coachRouter);
+router.use('/gym', gymRouter);
 
 
 module.exports = router;
 
 ```
 
-Este archivo js **importa la herramienta .Router() desde Express.js**, la cual emplea para **enlazar las rutas de moviesRouter, loginRouter, orderRouter y customerRouter, y por tanto su contenido, con index.js**. En este sentido, **router.js es un mero enlace entre la aplicación principal (index.js) con sus dependencias.**
+Este archivo js **importa la herramienta .Router() desde Express.js**, la cual emplea para **enlazar las rutas de userRouter, lessonRouter, coachRouter y gymRouter, y por tanto su contenido, con index.js**. En este sentido, **router.js es un mero enlace entre la aplicación principal (index.js) con sus dependencias.**
 
 <br>
 
