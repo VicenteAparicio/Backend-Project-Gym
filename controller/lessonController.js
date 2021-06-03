@@ -1,5 +1,4 @@
 const Lesson = require('../models/lesson');
-const Coach = require('../models/coach');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 

@@ -1,6 +1,6 @@
-const Coach = require('../models/gym');
+const Gym = require('../models/gym');
 
-class Gym {
+class Locals {
 
     // GET INFO ABOUT GYM
     async allGyms(){
@@ -25,7 +25,7 @@ class Gym {
     async addLesson(body){
         const id = body.id;
         const lesson = body.lessons;
-        return Lesson.findByIdAndUpdate(
+        return Gym.findByIdAndUpdate(
             {_id: id},
             {$push: {lessons: lesson}}
         );
@@ -53,5 +53,5 @@ class Gym {
     
 }
 
-const gymController = new Gym();
+const gymController = new Locals();
 module.exports = gymController;

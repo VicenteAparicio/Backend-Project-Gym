@@ -26,9 +26,10 @@ router.get('/all_gyms', async (req, res) => {
     }
 });
 // NEW GYM
-router.get('/new_gym', async (req, res) => {
+router.post('/new_gym', async (req, res) => {
     try {
-        res.json(await gymController.newGym());
+        const body = req.body;
+        res.json(await gymController.newGym(body));
     } catch (err) {
         return res.status(500).json({
             mensaje: err.message
@@ -40,7 +41,7 @@ router.get('/new_gym', async (req, res) => {
 router.post('/addlesson', async (req,res) => {
     try{
         const body = req.body;
-        res.json(await lessonController.addLesson(body));
+        res.json(await gymController.addLesson(body));
     } catch (err) {
         return res.status(500).json({
             mesaje: err.message
