@@ -21,6 +21,17 @@ class Gym {
         return Gym.create(body);
     }   
 
+    // NEW LESSON ON GYM
+    async addLesson(body){
+        const id = body.id;
+        const lesson = body.lessons;
+        return Lesson.findByIdAndUpdate(
+            {_id: id},
+            {$push: {lessons: lesson}}
+        );
+    }
+
+
     // MODIFY GYM DATA
 
     async modifyGym(body){

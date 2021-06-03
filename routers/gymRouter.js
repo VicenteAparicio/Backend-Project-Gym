@@ -26,12 +26,24 @@ router.get('/all_gyms', async (req, res) => {
     }
 });
 // NEW GYM
-router.get('/new_gym', admin, async (req, res) => {
+router.get('/new_gym', async (req, res) => {
     try {
         res.json(await gymController.newGym());
     } catch (err) {
         return res.status(500).json({
             mensaje: err.message
+        });
+    }
+});
+
+// ADD LESSON ON GYM
+router.post('/addlesson', async (req,res) => {
+    try{
+        const body = req.body;
+        res.json(await lessonController.addLesson(body));
+    } catch (err) {
+        return res.status(500).json({
+            mesaje: err.message
         });
     }
 });

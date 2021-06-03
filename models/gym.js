@@ -44,8 +44,8 @@ const toJSONConfig = {
            return ret
     }
 }
-coachSchema.set('toJSON', toJSONConfig);
+gymSchema.set('toJSON', toJSONConfig);
 
 
-const Coach = mongoose.model('Coach', coachSchema);
-module.exports = Coach;
+const Gym = mongoose.model('Gym', gymSchema);
+module.exports = Gym;
