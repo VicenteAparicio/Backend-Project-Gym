@@ -12,7 +12,8 @@ class Locals {
     // FIND ALL GYMS
 
     async allGyms(){
-        return Gym.find();
+        let res = await Gym.find().populate('lessons');
+        return res;
     }
 
     // NEW GYM
