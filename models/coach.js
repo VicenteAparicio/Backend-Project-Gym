@@ -3,15 +3,10 @@ const Schema = mongoose.Schema;
 
 
 
-const userSchema = new Schema({
+const coachSchema = new Schema({
     name: {
         type: String,
         required: true
-    },
-    nick: {
-        type: String,
-        required: true,
-        unique: true
     },
     email: {
         type: String,
@@ -19,10 +14,33 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
+    instagram:{
+        type: String,
+        requierd: true
+    },
     password: {
         type: String,
         required: true,
     },
+    level: {
+        type: String,
+        required: true
+    },
+    position: {
+        type: String,
+    },
+    tasks: {
+        type: String,
+    },
+    special: {
+        type: String,
+    },
+    lessons: [{
+        type: mongoose.Schema.Types.ObjectId, ref: "Lesson"
+    }],
+    // lessons: {
+    //     type: Array,
+    // },
     birthdate: {
         type: Date,
         required: true
@@ -53,8 +71,8 @@ const toJSONConfig = {
            return ret
     }
 }
-userSchema.set('toJSON', toJSONConfig);
+coachSchema.set('toJSON', toJSONConfig);
 
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const Coach = mongoose.model('Coach', coachSchema);
+module.exports = Coach;

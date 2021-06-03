@@ -5,6 +5,13 @@ const secret = "Everyone lies";
 
 class Customer {
 
+    // NEW USER
+    async newUser(body){
+        body.password = await bcrypt.hashSync(body.password, 10);
+        return User.create(body);
+    }
+
+    // LOGIN
     async login(email,password){
         const user = await User.findOne({email});
         if(!user){
@@ -24,33 +31,55 @@ class Customer {
         return ({token, user});
     }
 
-    async delete(body){
-        let id = body.id;
-        return User.findByIdAndDelete({_id: id});
-    }
-
+    // MODIFY USER BY USER
     async modifyUser(body){
         return User.findByIdAndUpdate(
             {_id: body.id},
             {   nick : body.nick,
                 name : body.name,
-                city : body.city  },
+                birthdate : body.birthdate,
+                password : body.password,
+                city : body.city,
+                country : body.country  },
             {   new: true,
                 omiteUndefined:true }
         );
     }
 
-        async allUsers(){
-            return User.find({isAdmin:true});
-        }
+    // MODIFY USER BY ADMIN
+    async modifyAdmin(body){
+        return User.findByIdAndUpdate(
+            {_id: body.id},
+            {   nick : body.nick,
+                name : body.name,
+                birthdate : body.birthdate,
+                password : body.password,
+                city : body.city,
+                country : body.country,
+                idAdmin : body.isAdmin,
+                email : body.email, },
+            {   new: true,
+                omiteUndefined:true }
+        );
+    }
 
-        async newUser(user){
-            user.password = await bcrypt.hashSync(user.password, 10);
-            return User.create(user);
-        }    
+
+    // DELETE USER
+    async delete(body){
+        let id = body.id;
+        return User.findByIdAndDelete({_id: id});
+    }
+
+    // FIND ALL USERS (ACTIVE OR NOT)
+    async allUsers(){
+        return User.find();
+    }
+
+    // FIND ALL ACTIVE USERS (ADMIN ONLY)
+    async allActiveUsers(){
+        return User.find({isActive:true});
+    }    
 }
-
-
 
 const userController = new Customer();
 module.exports = userController;
