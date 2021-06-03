@@ -17,6 +17,18 @@ router.post('/newuser', async (req, res) => {
     }
 });
 
+// NEW COACH REGISTER
+router.post('/newcoach', admin, async (req, res) => {
+    try {
+        let body = req.body;
+        res.json(await userController.newCoach(body));
+    } catch (err) {
+        return res.status(500).json({
+            mesaje: err.message
+        });
+    }
+});
+
 // LOGIN 
 router.post('/login', async (req, res) => {
     try {
@@ -48,7 +60,7 @@ router.put('/modify', auth, async (req, res) => {
 router.put('/modifyadmin', admin, async (req, res) => {
     try {
         let body = req.body;
-        res.json(await userController.modifyUser(body));
+        res.json(await userController.modifyAdmin(body));
     } catch (err) {
         return res.status(500).json({
             mesaje: err.message
@@ -68,7 +80,7 @@ router.delete('/delete', auth, async (req, res) => {
     }
 });
 
-// FIND ALL USERS
+// FIND ALL USERS (ACTIVE OR NOT)
 router.get('/allusers', admin, async (req, res) => {
     try {
         res.json(await userController.allUsers());
@@ -78,5 +90,28 @@ router.get('/allusers', admin, async (req, res) => {
         });
     }
 });
+
+// FIND ALL ACTIVE USERS
+router.get('/allactiveusers', admin, async (req, res) => {
+    try {
+        res.json(await userController.allActiveUsers());
+    } catch (err) {
+        return res.status(500).json({
+            mesaje: err.message
+        });
+    }
+});
+
+// FIND ALL COACHS
+router.get('/allcoachs', auth, async (req, res) => {
+    try {
+        res.json(await userController.allCoachs());
+    } catch (err) {
+        return res.status(500).json({
+            mesaje: err.message
+        });
+    }
+});
+
 
 module.exports = router;

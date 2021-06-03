@@ -6,10 +6,10 @@ const secret = "Everyone lies";
 class Customer {
 
     // NEW USER
-    async newUser(user){
-        user.password = await bcrypt.hashSync(user.password, 10);
-        return User.create(user);
-    }   
+    async newUser(body){
+        body.password = await bcrypt.hashSync(body.password, 10);
+        return User.create(body);
+    }
 
     // LOGIN
     async login(email,password){
@@ -47,7 +47,7 @@ class Customer {
     }
 
     // MODIFY USER BY ADMIN
-    async modifyUser(body){
+    async modifyAdmin(body){
         return User.findByIdAndUpdate(
             {_id: body.id},
             {   nick : body.nick,
@@ -57,8 +57,7 @@ class Customer {
                 city : body.city,
                 country : body.country,
                 idAdmin : body.isAdmin,
-                email : body.email,
-                isCoach: body.isCoach  },
+                email : body.email, },
             {   new: true,
                 omiteUndefined:true }
         );
@@ -71,12 +70,15 @@ class Customer {
         return User.findByIdAndDelete({_id: id});
     }
 
-
-    // FIND ALL USERS (ADMIN ONLY)
+    // FIND ALL USERS (ACTIVE OR NOT)
     async allUsers(){
-        return User.find({isAdmin:true});
+        return User.find();
     }
-    
+
+    // FIND ALL ACTIVE USERS (ADMIN ONLY)
+    async allActiveUsers(){
+        return User.find({isActive:true});
+    }    
 }
 
 const userController = new Customer();

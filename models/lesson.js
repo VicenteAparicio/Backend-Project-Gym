@@ -9,16 +9,14 @@ const lessonSchema = new Schema({
         required: true
     },
     coach: {
-        type: String,
-        required: true,
+        type: Schema.ObjectId, ref:"Coach"
     },
     creationDate: {
         type: Date,
         required: true,
     },
     members: {
-        type: Array,
-        required: true,
+        type: Array
     },
     messages: {
         type: Array,
