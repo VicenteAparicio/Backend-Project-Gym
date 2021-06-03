@@ -3,47 +3,38 @@ const Schema = mongoose.Schema;
 
 
 
-const userSchema = new Schema({
+const gymSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
-    nick: {
+    adress: {
         type: String,
         required: true,
         unique: true
     },
-    email: {
-        type: String,
-        toLowerCase: true,
-        required: true,
-        unique: true
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    birthdate: {
-        type: Date,
+    cp: {
+        type: Number,
         required: true
     },
+    phone: {
+        type: Number,
+        required: true,
+    },
+    lessons: [{
+        type: mongoose.Schema.Types.ObjectId, ref: "Lesson"
+    }],
     country: {
         type: String,
     },
     city: {
         type: String,
     },
-    isCoach:{
-        type: Boolean,
-    },
-    isAdmin: {
-        type: Boolean,
-    },
     isActive: {
         type: Boolean,
         default: true
     }
-
 });
 
 
@@ -53,8 +44,8 @@ const toJSONConfig = {
            return ret
     }
 }
-userSchema.set('toJSON', toJSONConfig);
+gymSchema.set('toJSON', toJSONConfig);
 
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const Gym = mongoose.model('Gym', gymSchema);
+module.exports = Gym;

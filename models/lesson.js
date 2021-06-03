@@ -4,17 +4,19 @@ const Schema = mongoose.Schema;
 
 
 const lessonSchema = new Schema({
-    name: {
+    title: {
         type: String,
         required: true
     },
+    coaches: [{
+        type: mongoose.Schema.Types.ObjectId, ref:"Coach"
+    }],
     creationDate: {
         type: Date,
         required: true,
     },
     members: {
-        type: Array,
-        required: true,
+        type: Array
     },
     messages: {
         type: Array,

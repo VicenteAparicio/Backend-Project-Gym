@@ -3,50 +3,48 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
 
-class Customer {
+class Room {
 
 
-        async allRooms(){
-            return Lesson.find();
+        async allLessons(){
+            return Lesson.find().populate('coaches');
         }
 
-        async newRoom(room){
-            return Lesson.create(room);
+        async newLesson(body){
+            return Lesson.create(body);
         }
 
-        async joinRoom(data){
-            const id = data.id;
-            const member = data.member;
+        async joinLesson(body){
+            const id = body.id;
+            const member = body.member;
             return Lesson.findByIdAndUpdate(
                 {_id: id},
                 {$push: {members: member}}
             );
         }
 
-        async leaveRoom(data){
-            const id = data.id;
-            const member = data.member;
+        async leaveLesson(body){
+            const id = body.id;
+            const member = body.member;
             return Lesson.findByIdAndUpdate(
                 {_id: id},
                 {$pull: {members : member}}
             );
         }
-        async addMessage(data){
-            const id = data.id;
-
-            const userId = data.userId;
-
+        async addMessage(body){
+            const id = body.id;
+            const userId = body.userId;
             const user = await User.findById(userId);
             let message = {
-                idUser : data.userId,
+                idUser : body.userId,
                 user : user.name,
-                text : data.text,
-                date : data.date,
-                report : data.report,
-                delivered : data.delivered,
-                read : data.read
+                text : body.text,
+                date : body.date,
+                report : body.report,
+                delivered : body.delivered,
+                read : body.read
             }
-            return Room.findByIdAndUpdate(
+            return Lesson.findByIdAndUpdate(
                 {_id: id},
                 {$push: {messages : message}}
             );
@@ -56,5 +54,5 @@ class Customer {
 
 
 
-const chatController = new Customer();
-module.exports = chatController;
+const lessonController = new Room();
+module.exports = lessonController;
