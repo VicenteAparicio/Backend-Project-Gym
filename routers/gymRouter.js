@@ -61,8 +61,16 @@ router.put('/modify_gym', admin, async (req, res) => {
     }
 });
 
-
-
-
+// DELETE LESSON FROM GYM
+router.put('/delete_lesson', admin, async (req, res) => {
+    try {
+        let body = req.body;
+        res.json(await gymController.deleteLesson(body));
+    } catch (err) {
+        return res.status(500).json({
+            mensaje: err.message
+        });
+    }
+});
 
 module.exports = router;
