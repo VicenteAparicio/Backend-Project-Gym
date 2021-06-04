@@ -8,6 +8,10 @@ const lessonSchema = new Schema({
         type: String,
         required: true
     },
+    date:{
+        type: String,
+        required: true
+    },
     coaches: [{
         type: mongoose.Schema.Types.ObjectId, ref:"Coach"
     }],

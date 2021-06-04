@@ -26,7 +26,7 @@ class Customer {
             createAt : new Date,
             isAdmin : coach.isAdmin
         }
-
+        
         const token =  jwt.sign(payload,secret);
         return ({token, coach});
     }

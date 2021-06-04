@@ -5,7 +5,6 @@ const User = require('../models/user');
 
 class Room {
 
-
         async allLessons(){
             return Lesson.find().populate('coaches');
         }

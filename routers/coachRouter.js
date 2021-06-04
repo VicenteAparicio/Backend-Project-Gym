@@ -17,7 +17,7 @@ router.post('/newcoach', admin, async (req, res) => {
 });
 
 // LOGIN 
-router.post('/login', coach, async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
         const {email,password} = req.body;
         let jwt = await coachController.login(email,password);

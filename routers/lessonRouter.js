@@ -5,6 +5,8 @@ const admin = require('../middleware/admin');
 const coach = require('../middleware/coach');
 const jwt = require('jsonwebtoken');
 
+
+// FIND ALL LESSONS
 router.get('/alllessons', admin, async (req, res) => {
     try {
         res.json(await lessonController.allLessons());
@@ -15,6 +17,7 @@ router.get('/alllessons', admin, async (req, res) => {
     }
 });
 
+// CREATE NEW LESSON
 router.post('/newlesson', coach, async (req, res) => {
     try {
         const body = req.body;
@@ -26,6 +29,8 @@ router.post('/newlesson', coach, async (req, res) => {
     }
 });
 
+
+// ADD USER TO A LESSON
 router.post('/joinlesson', auth, async (req,res) => {
     try{
         const body = req.body;
@@ -37,6 +42,8 @@ router.post('/joinlesson', auth, async (req,res) => {
     }
 });
 
+
+// LEAVE USER FROM LESSON
 router.post('/leavelesson', auth, async (req,res) => {
     try{
         const data = req.body;
@@ -48,6 +55,7 @@ router.post('/leavelesson', auth, async (req,res) => {
     }
 });
 
+// ADD MESSAGE ON LESSON
 router.post('/addmessage', auth, async (req,res) => {
     try{
         const data = req.body;
