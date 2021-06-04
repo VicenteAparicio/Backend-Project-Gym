@@ -20,7 +20,7 @@ class Customer {
         if(!await bcrypt.compare(password, user.password)){
             throw new Error('Password is wrong');
         }
-
+        
         const payload = {
             userId : user.id,
             createAt : new Date,

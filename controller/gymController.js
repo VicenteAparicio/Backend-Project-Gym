@@ -51,6 +51,17 @@ class Locals {
             }
         );
     }
+
+    // DELETE LESSON FROM GYM
+    async deleteLesson(body){
+        let gymId = body.gymId;
+        let lesson_id = body.lesson_id;
+        
+        console.log(lesson_id)
+        return Gym.findByIdAndUpdate(
+            {_id: gymId},
+            { $pull: { lessons: { _id: lesson_id } } });
+    }
     
 }
 
