@@ -24,12 +24,32 @@ class Locals {
 
     // NEW LESSON ON GYM
     async addLesson(body){
-        const id = body.id;
-        const lesson = body.lessons;
+        const gymId = body.gymId;
+        const lessonId = body.lesson_id;
+        let res = await Gym.findById(gymId);
+        
+        if (!res){
+            throw new Error('That gym does not exist');
+        }
+
+        let res2 = res.lessons;
+
+        for (let i in res2){
+            if (res.lessons[i] == lessonId){
+                throw new Error('That lessons already exist on this gym')
+            }
+        } 
+  
         return Gym.findByIdAndUpdate(
-            {_id: id},
-            {$push: {lessons: lesson}}
+            { _id: gymId },
+            { $push: { lessons: lessonId } }
         );
+
+        // return Gym.findByIdAndUpdate(
+        //     { _id: gymId },
+        //     { res2: { $nin: [lessonId] } }, WHY IS NOT WORKING????
+        //     { $push: { lessons: lessonId } }
+        // );
     }
 
 
@@ -60,7 +80,7 @@ class Locals {
         console.log(lesson_id)
         return Gym.findByIdAndUpdate(
             {_id: gymId},
-            { $pull: { lessons: { _id: lesson_id } } });
+            { $pull: { lessons: lesson_id } });
     }
     
 }
