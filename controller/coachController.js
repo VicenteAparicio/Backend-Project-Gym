@@ -66,12 +66,15 @@ class Customer {
     async rate(id){
         let trainer = await Coach.findById(id);
         let valorations = trainer.valoration;
-        console.log("Este es el trainer ", trainer)
-        console.log("Estas son sus valoraciones ", valorations)
+        let arrayRating = [];
+        
+        for (let i in valorations){
+            arrayRating.push(valorations[i].rating);
+        }
 
         const total = (accumulator, currentValue) => accumulator + currentValue;
 
-        let media = valorations.reduce(total)/valorations.length;
+        let media = arrayRating.reduce(total)/valorations.length;
 
         return media;
 
