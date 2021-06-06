@@ -5,7 +5,6 @@ const User = require('../models/user');
 
 class Room {
 
-
         async allLessons(){
             return Lesson.find().populate('coaches');
         }
@@ -17,8 +16,17 @@ class Room {
         async joinLesson(body){
             const id = body.id;
             const member = body.member;
+            const membrillos = await Lesson.findById(id);
+            const miembros = membrillos.members;
+
+            for (let i in miembros){
+                if (miembros[i] == member){
+                    throw new Error('You are already signed for this lesson')
+                }
+            }
             return Lesson.findByIdAndUpdate(
                 {_id: id},
+                // {members: {$nin: member}}, // WHY IS NOT WORKING??? 
                 {$push: {members: member}}
             );
         }

@@ -56,6 +56,19 @@ router.put('/modify', auth, async (req, res) => {
     }
 });
 
+// ADD VALORATION
+router.put('/add_valoration', auth, async (req, res) => {
+    try {
+        let body = req.body;
+        res.json(await userController.addValoration(body));
+    } catch (err) {
+        return res.status(500).json({
+            mesaje: err.message
+        });
+    }
+});
+
+
 // MODIFY USER BY ADMIN
 router.put('/modifyadmin', admin, async (req, res) => {
     try {

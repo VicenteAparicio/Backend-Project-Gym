@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Coach = require('../models/coach');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const secret = "Everyone lies";
@@ -20,7 +21,7 @@ class Customer {
         if(!await bcrypt.compare(password, user.password)){
             throw new Error('Password is wrong');
         }
-        
+
         const payload = {
             userId : user.id,
             createAt : new Date,
@@ -62,6 +63,22 @@ class Customer {
                 omiteUndefined:true }
         );
     }
+
+    // ADD VALORATION
+    async addValoration(body){
+
+        return Coach.findByIdAndUpdate(
+            {_id: body.coachId},
+            { $push : { 
+                valoration : {
+                   userId: body.userId,
+                   rating: body.valoration
+                },
+            }},
+        );
+    }
+
+    
 
 
     // DELETE USER

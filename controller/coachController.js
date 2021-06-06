@@ -26,7 +26,7 @@ class Customer {
             createAt : new Date,
             isAdmin : coach.isAdmin
         }
-
+        
         const token =  jwt.sign(payload,secret);
         return ({token, coach});
     }
@@ -62,6 +62,23 @@ class Customer {
         return Coach.find();
     }
     
+    // DISPLAY VALORATIONS
+    async rate(id){
+        let trainer = await Coach.findById(id);
+        let valorations = trainer.valoration;
+        let arrayRating = [];
+        
+        for (let i in valorations){
+            arrayRating.push(valorations[i].rating);
+        }
+
+        const total = (accumulator, currentValue) => accumulator + currentValue;
+
+        let media = arrayRating.reduce(total)/valorations.length;
+
+        return media;
+
+      }
 }
 
 const userController = new Customer();

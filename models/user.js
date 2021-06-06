@@ -33,9 +33,6 @@ const userSchema = new Schema({
     city: {
         type: String,
     },
-    isCoach:{
-        type: Boolean,
-    },
     isAdmin: {
         type: Boolean,
     },

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const gymController = require('../controller/gymController');
 const admin = require('../middleware/admin');
+const coach = require('../middleware/coach');
 //const jwt = require('jsonwebtoken');
 
 // GET INFO ABOUT GYM
@@ -62,7 +63,7 @@ router.put('/modify_gym', admin, async (req, res) => {
 });
 
 // DELETE LESSON FROM GYM
-router.put('/delete_lesson', admin, async (req, res) => {
+router.put('/delete_lesson', coach, async (req, res) => {
     try {
         let body = req.body;
         res.json(await gymController.deleteLesson(body));
