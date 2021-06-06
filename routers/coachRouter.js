@@ -43,6 +43,8 @@ router.put('/modify', coach, async (req, res) => {
     }
 });
 
+
+
 // DELETE COACH
 router.delete('/delete', coach, async (req, res) => {
     try {
@@ -66,5 +68,15 @@ router.get('/allcoachs', coach, async (req, res) => {
     }
 });
 
-
+// FIND ALL VALORATIONS
+router.get('/rate/:id', coach, async (req, res) => {
+    try {
+        let id = req.params.id;
+        res.json(await coachController.rate(id));
+    } catch (err) {
+        return res.status(500).json({
+            mesaje: err.message
+        });
+    }
+});
 module.exports = router;

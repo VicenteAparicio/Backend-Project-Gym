@@ -12,3 +12,4 @@ router.use('/gym', gymRouter);
 
 
 module.exports = router;
+
