@@ -8,13 +8,16 @@ const lessonSchema = new Schema({
         type: String,
         required: true
     },
-    date:{
+    description: {
         type: String,
-        required: true
     },
     coaches: [{
         type: mongoose.Schema.Types.ObjectId, ref:"Coach"
     }],
+    date:{
+        type: String,
+        required: true
+    },
     creationDate: {
         type: Date,
         required: true,

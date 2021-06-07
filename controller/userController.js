@@ -78,12 +78,9 @@ class Customer {
         );
     }
 
-    
-
-
     // DELETE USER
     async delete(body){
-        let id = body.id;
+        let id = body.userId;
         return User.findByIdAndDelete({_id: id});
     }
 

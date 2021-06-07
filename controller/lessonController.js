@@ -1,4 +1,5 @@
 const Lesson = require('../models/lesson');
+const Coach = require('../models/coach');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
@@ -7,6 +8,19 @@ class Room {
 
         async allLessons(){
             return Lesson.find().populate('coaches');
+        }
+
+        async usersLessons(){
+            return Lesson.find(
+                {isActive: true},
+                {
+                    _id: 0, //HIDE ID
+                    title: '$title',
+                    description: '$description',
+                    date: '$date'
+                }
+
+            );
         }
 
         async newLesson(body){
