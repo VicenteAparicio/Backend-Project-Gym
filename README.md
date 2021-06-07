@@ -120,7 +120,7 @@ This js file **imports the .Router() utility from Express.js**, which is used to
 ### Prerequisites
 <br>
 
-Clone the project from [here](https://github.com/PedroAgullo/Challenge5_GH_PMJ).
+Clone the project from [here](https://github.com/migueltmsp/Backend-Project-Gym.git).
 
 Install the needed dependencies (on Bash): 
 ```
@@ -130,9 +130,10 @@ npm i
 Install Postman from [here](https://www.postman.com/downloads/).
 
 In Postman:
-1. Add a new collection
-2. Use GET with the address: http://localhost:3000 <br> <br>
-Although we used 3000 as the default port, you can use another one of your choice.
+1. Add our collection of HTTP requests [here](invite_code=5a7af4d5bdf51ea791e1ba2b4d37e384&ws=e693bb66-0d6c-4181-8e2b-fb02e351d762).
+2. Use any of the requests to check the functionality.
+
+Although we used 3000 as the default port, you can use another one of your choice, but **remember to change it on index.js / const port**.
 
 
 
@@ -236,6 +237,26 @@ module.exports = router;
 Este archivo js **importa la herramienta .Router() desde Express.js**, la cual emplea para **enlazar las rutas de userRouter, lessonRouter, coachRouter y gymRouter, y por tanto su contenido, con index.js**. En este sentido, **router.js es un mero enlace entre la aplicación principal (index.js) con sus dependencias.**
 
 <br>
+
+## Gestión de los Endpoints y la base de datos
+### Prerrequisitos
+<br>
+
+Clona el proyecto desde [aquí](https://github.com/migueltmsp/Backend-Project-Gym.git).
+
+Instala las dependencias necesarias (desde Bash): 
+```
+npm i
+```
+
+Instala Postman desde [aquí](https://www.postman.com/downloads/).
+
+En Postman:
+1. Añade nuestra colección de peticiones HTTP desde [aquí](invite_code=5a7af4d5bdf51ea791e1ba2b4d37e384&ws=e693bb66-0d6c-4181-8e2b-fb02e351d762).
+2. Usa cualquiera de las peticiones para comprobar la funcionalidad.
+
+Aunque hemos usado 3000 como el puerto para el backend, puedes emplear otro, pero **recuerda cambiarlo desde index.js / const port**.
+
 
 
 ## Conclusiones
