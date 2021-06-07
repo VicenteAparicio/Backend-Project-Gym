@@ -131,7 +131,7 @@ Install Postman from [here](https://www.postman.com/downloads/).
 
 In Postman:
 1. Add our collection of HTTP requests [here](invite_code=5a7af4d5bdf51ea791e1ba2b4d37e384&ws=e693bb66-0d6c-4181-8e2b-fb02e351d762).
-2. Use any of the requests to check the functionality.
+2. Use any of the requests to check the functionality .
 
 Although we used 3000 as the default port, you can use another one of your choice, but **remember to change it on index.js / const port**.
 
