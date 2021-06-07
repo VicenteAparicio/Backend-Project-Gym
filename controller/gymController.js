@@ -4,20 +4,16 @@ class Locals {
 
     // GET INFO ABOUT GYM
     async allGyms(){
-
         return Gym.findById();
     }
 
-
     // FIND ALL GYMS
-
     async allGyms(){
         let res = await Gym.find().populate('lessons');
         return res;
     }
 
     // NEW GYM
-
     async newGym(body){
         return Gym.create(body);
     }   
@@ -44,17 +40,10 @@ class Locals {
             { _id: gymId },
             { $push: { lessons: lessonId } }
         );
-
-        // return Gym.findByIdAndUpdate(
-        //     { _id: gymId },
-        //     { res2: { $nin: [lessonId] } }, WHY IS NOT WORKING????
-        //     { $push: { lessons: lessonId } }
-        // );
     }
 
 
     // MODIFY GYM DATA
-
     async modifyGym(body){
         return Gym.findByIdAndUpdate(
             {_id: body.id},
