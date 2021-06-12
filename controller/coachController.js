@@ -11,7 +11,6 @@ class Customer {
         return Coach.create(body);
     }   
 
-    // LOGIN
     async login(email,password){
         const coach = await Coach.findOne({email});
         if(!coach){
@@ -22,11 +21,11 @@ class Customer {
         }
 
         const payload = {
-            userId : coach.id,
+            coachId : coach.id,
             createAt : new Date,
             isAdmin : coach.isAdmin
         }
-        
+
         const token =  jwt.sign(payload,secret);
         return ({token, coach});
     }

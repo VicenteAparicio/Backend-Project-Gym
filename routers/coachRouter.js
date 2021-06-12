@@ -22,8 +22,8 @@ router.post('/login', async (req, res) => {
         const {email,password} = req.body;
         let jwt = await coachController.login(email,password);
         const token = jwt.token;
-        const user = jwt.user;
-        res.json({token,user})
+        const coach = jwt.coach;
+        res.json({token,coach})
     } catch (err) {
         return res.status(500).json({
             mesaje: err.message
@@ -58,7 +58,7 @@ router.delete('/delete', coach, async (req, res) => {
 });
 
 // FIND ALL COACHS
-router.get('/allcoachs', coach, async (req, res) => {
+router.get('/allcoachs', async (req, res) => {
     try {
         res.json(await coachController.allCoachs());
     } catch (err) {

@@ -19,7 +19,6 @@ class Room {
                     description: '$description',
                     date: '$date'
                 }
-
             );
         }
 
@@ -40,7 +39,7 @@ class Room {
             }
             return Lesson.findByIdAndUpdate(
                 {_id: id},
-                // {members: {$nin: member}}, // WHY IS NOT WORKING??? 
+                // {members: {$ne: member}}, // WHY IS NOT WORKING??? 
                 {$push: {members: member}}
             );
         }
