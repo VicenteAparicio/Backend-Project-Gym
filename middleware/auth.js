@@ -15,7 +15,7 @@ const auth = (req, res, next) => {
         if (auth.isAdmin == true){
             return next();
         } else {
-            if(auth.userId != req.body.id && auth.userId != req.body.userId){
+            if(auth.userId != req.body.userId){
                 throw new Error("No tienes permiso para realizar esta acción");
             } else  {
                 return next();

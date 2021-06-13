@@ -56,6 +56,7 @@ const coachSchema = new Schema({
     },
     isCoach:{
         type: Boolean,
+        default: true
     },
     isAdmin: {
         type: Boolean,

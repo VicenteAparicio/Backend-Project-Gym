@@ -17,25 +17,29 @@ router.post('/newuser', async (req, res) => {
     }
 });
 
-// NEW COACH REGISTER
-router.post('/newcoach', admin, async (req, res) => {
-    try {
-        let body = req.body;
-        res.json(await userController.newCoach(body));
-    } catch (err) {
-        return res.status(500).json({
-            mesaje: err.message
-        });
-    }
-});
+// // NEW COACH REGISTER
+// router.post('/newcoach', admin, async (req, res) => {
+//     try {
+//         let body = req.body;
+//         res.json(await userController.newCoach(body));
+//     } catch (err) {
+//         return res.status(500).json({
+//             mesaje: err.message
+//         });
+//     }
+// });
 
 // LOGIN 
 router.post('/login', async (req, res) => {
     try {
         const {email,password} = req.body;
+        console.log("router mail",email)
+        console.log("router pass",password)
         let jwt = await userController.login(email,password);
         const token = jwt.token;
         const user = jwt.user;
+        console.log(token)
+        console.log(user)
         res.json({token,user})
     } catch (err) {
         return res.status(500).json({

@@ -1,4 +1,5 @@
 const Lesson = require('../models/lesson');
+const Coach = require('../models/coach');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
@@ -9,13 +10,25 @@ class Room {
             return Lesson.find().populate('coaches');
         }
 
+        async usersLessons(){
+            return Lesson.find(
+                {isActive: true},
+                {
+                    _id: 0, //HIDE ID
+                    title: '$title',
+                    description: '$description',
+                    date: '$date'
+                }
+            );
+        }
+
         async newLesson(body){
             return Lesson.create(body);
         }
 
         async joinLesson(body){
             const id = body.id;
-            const member = body.member;
+            const member = body.userId;
             const membrillos = await Lesson.findById(id);
             const miembros = membrillos.members;
 
@@ -26,7 +39,7 @@ class Room {
             }
             return Lesson.findByIdAndUpdate(
                 {_id: id},
-                // {members: {$nin: member}}, // WHY IS NOT WORKING??? 
+                // {members: {$ne: member}}, // WHY IS NOT WORKING??? 
                 {$push: {members: member}}
             );
         }

@@ -17,6 +17,17 @@ router.get('/alllessons', admin, async (req, res) => {
     }
 });
 
+// FIND ALL LESSONS LIKE USER
+router.get('/usersLessons', auth, async (req, res) => {
+    try {
+        res.json(await lessonController.usersLessons());
+    } catch (err) {
+        return res.status(500).json({
+            mesaje: err.message
+        });
+    }
+});
+
 // CREATE NEW LESSON
 router.post('/newlesson', coach, async (req, res) => {
     try {

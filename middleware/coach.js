@@ -12,7 +12,7 @@ const coach = (req, res, next) => {
         let auth = jwt.verify(token,secret);
         if (auth.isAdmin == true){
             return next();
-        } else if (auth.isCoach == false){
+        } else if (!auth.isCoach){
             throw new Error("No tienes permiso para realizar esta acción");
         }
         return next();
