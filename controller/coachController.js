@@ -3,11 +3,15 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const secret = "Everyone lies";
 
-class Customer {
+class Trainer {
 
     // NEW COACH
     async newCoach(body){
+        console.log("llegamos a newcoachController")
+        console.log("Este es el password origen: ", body.password)
         body.password = await bcrypt.hashSync(body.password, 10);
+        console.log("este es el password hash", body.password)
+        console.log("este es el body", body)
         return Coach.create(body);
     }   
 
@@ -80,5 +84,5 @@ class Customer {
       }
 }
 
-const userController = new Customer();
+const userController = new Trainer();
 module.exports = userController;

@@ -27,7 +27,7 @@ class Room {
         }
 
         async joinLesson(body){
-            const id = body.coachId;
+            const id = body.id;
             const member = body.userId;
             const membrillos = await Lesson.findById(id);
             const miembros = membrillos.members;
