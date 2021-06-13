@@ -32,6 +32,16 @@ class Customer {
         return ({token, user});
     }
 
+// DISPLAY ALL MY LESSONS
+async allMyLessons(body){
+    let email = body.email;
+    console.log("El body con el email es",email)
+    let res = await Lesson.find(Lesson,
+        {$where : {members:email}});
+    console.log(res)
+    return res;
+}
+
     // MODIFY USER BY USER
     async modifyUser(body){
         return User.findByIdAndUpdate(

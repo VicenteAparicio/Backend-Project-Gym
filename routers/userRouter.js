@@ -60,6 +60,18 @@ router.put('/modify', auth, async (req, res) => {
     }
 });
 
+// DISPLAY ALL MY LESSONS
+router.post('/all_my_lessons', auth, async (req, res) => {
+    try {
+        let body = req.body;
+        res.json(await userController.allMyLessons(body));
+    } catch (err) {
+        return res.status(500).json({
+            mesaje: err.message
+        });
+    }
+});
+
 // ADD VALORATION
 router.put('/add_valoration', auth, async (req, res) => {
     try {
