@@ -35,10 +35,10 @@ class Customer {
 
 // DISPLAY ALL MY LESSONS
 async allMyLessons(body){
-    let id = body.id;
-    console.log("El body con el id es",id)
+    let userId = body.userId;
+    console.log("El body con el id es",userId)
     let res = await Lesson.find(
-        {members:id}
+        {members:userId}
         );
     console.log(res)
     return res;
