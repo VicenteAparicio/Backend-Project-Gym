@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Coach = require('../models/coach');
+const Lesson = require('../models/lesson');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const secret = "Everyone lies";
@@ -34,10 +35,11 @@ class Customer {
 
 // DISPLAY ALL MY LESSONS
 async allMyLessons(body){
-    let email = body.email;
-    console.log("El body con el email es",email)
-    let res = await Lesson.find(Lesson,
-        {$where : {members:email}});
+    let id = body.id;
+    console.log("El body con el id es",id)
+    let res = await Lesson.find(
+        {members:id}
+        );
     console.log(res)
     return res;
 }
