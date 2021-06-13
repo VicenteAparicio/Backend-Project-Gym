@@ -32,6 +32,14 @@ class Customer {
         return ({token, user});
     }
 
+    // DISPLAY ALL MY LESSONS
+
+    async allMyLessons(){
+        let id = body.id;
+        let all_my_lessons = await Gym.findById(id).populate('lessons');
+        return res;
+    }
+
     // MODIFY USER BY USER
     async modifyUser(body){
         return User.findByIdAndUpdate(
