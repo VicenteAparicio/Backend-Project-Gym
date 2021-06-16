@@ -2,7 +2,7 @@ const express = require('express');
 const router = require('./router')
 const db = require('./config/mongoose')
 const app = express();
-const port = 3005;
+const port = 3000;
 const cors = require('cors');
 
 
@@ -13,6 +13,6 @@ app.use(router);
 
 
 db.then(() => (
-    app.listen(port, () => console.log(`Node server runing on http://localhost:${port}`))
+    app.listen(port, () => console.log(`Running on https://backendgymfsd.herokuapp.com`))
 ))
 .catch((error) => console.log(error));
