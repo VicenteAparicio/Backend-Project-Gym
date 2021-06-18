@@ -23,7 +23,7 @@ const lessonSchema = new Schema({
         required: true,
     },
     members: {
-        type: Array
+        type: mongoose.Schema.Types.ObjectId, ref:"User"
     },
     messages: {
         type: Array,

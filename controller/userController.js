@@ -36,10 +36,9 @@ class Customer {
 // DISPLAY ALL MY LESSONS
 async allMyLessons(body){
     let userId = body.userId;
-    console.log("El body con el id es",userId)
     let res = await Lesson.find(
         {members:userId}
-        ).populate("coaches");
+        ).populate("coaches").populate("members");
     return res;
 }
 
