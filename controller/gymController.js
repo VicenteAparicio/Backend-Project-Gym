@@ -3,10 +3,10 @@ const Gym = require('../models/gym');
 class Locals {
 
     // GET INFO ABOUT GYM
-    // async allGyms(){
-    //     return Gym.findById();
-    // }
-
+   /*  async infoGym(){
+        return Gym.findById();
+    }
+ */
     // FIND ALL GYMS
     async allGyms(){
         let res = await Gym.find().populate('lessons');

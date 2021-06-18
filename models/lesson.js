@@ -22,7 +22,7 @@ const lessonSchema = new Schema({
         type: Date,
         required: true,
     },
-    members:  [{
+    members: [{
         type: mongoose.Schema.Types.ObjectId, ref:"User"
     }],
     messages: {
