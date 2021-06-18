@@ -3,9 +3,9 @@ const Gym = require('../models/gym');
 class Locals {
 
     // GET INFO ABOUT GYM
-    async allGyms(){
-        return Gym.findById();
-    }
+    // async allGyms(){
+    //     return Gym.findById();
+    // }
 
     // FIND ALL GYMS
     async allGyms(){

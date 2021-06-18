@@ -38,7 +38,7 @@ async allMyLessons(body){
     let userId = body.userId;
     let res = await Lesson.find(
         {members:userId}
-        ).populate("coaches").populate("members");
+        ).populate("coaches");
     return res;
 }
 

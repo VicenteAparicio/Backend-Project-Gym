@@ -7,7 +7,7 @@ const User = require('../models/user');
 class Room {
 
         async allLessons(){
-            return Lesson.find().populate('coaches');
+            return Lesson.find().populate('coaches').populate('members');
         }
 
         async usersLessons(){
@@ -33,20 +33,20 @@ class Room {
         }
 
         async joinLesson(body){
-            const id = body.id;
-            const member = body.userId;
-            const membrillos = await Lesson.findById(id);
-            const miembros = membrillos.members;
+            const lessonId = body.lessonId;
+            const memberId = body.userId;
+            const lesson = await Lesson.findById(lessonId);
+            const members = lesson.members;
 
-            for (let i in miembros){
-                if (miembros[i] == member){
+            for (let i in members){
+                if (members[i]._id == memberId){
                     throw new Error('You are already signed for this lesson')
                 }
             }
             return Lesson.findByIdAndUpdate(
-                {_id: id},
+                {_id: lessonId},
                 // {members: {$ne: member}}, // WHY IS NOT WORKING??? 
-                {$push: {members: member}}
+                {$push: {members: memberId}}
             );
         }
 
