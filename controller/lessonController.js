@@ -7,7 +7,7 @@ const User = require('../models/user');
 class Room {
 
         async allLessons(){
-            return Lesson.find().populate('coaches');
+            return Lesson.find().populate('coaches',"members");
         }
 
         async usersLessons(){
@@ -33,8 +33,8 @@ class Room {
         }
 
         async joinLesson(body){
-            const lessonId = body.id;
-            const memberId = body.userId;
+            const id = body.id;
+            const member = body.userId;
             const membrillos = await Lesson.findById(id);
             const miembros = membrillos.members;
 
