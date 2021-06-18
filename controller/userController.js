@@ -39,8 +39,7 @@ async allMyLessons(body){
     console.log("El body con el id es",userId)
     let res = await Lesson.find(
         {members:userId}
-        );
-    console.log(res)
+        ).populate("coaches");
     return res;
 }
 
