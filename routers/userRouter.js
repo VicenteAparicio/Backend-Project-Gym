@@ -98,7 +98,7 @@ router.put('/modifyadmin', admin, async (req, res) => {
 });
 
 // DELETE USER
-router.delete('/delete', auth, async (req, res) => {
+router.post('/delete', auth, async (req, res) => {
     try {
         const body = req.body;
         res.json(await userController.delete(body));

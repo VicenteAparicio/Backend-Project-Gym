@@ -40,6 +40,19 @@ router.post('/newlesson', coach, async (req, res) => {
     }
 });
 
+// DELETE LESSON
+router.post('/delete', auth, async (req, res) => {
+    try {
+        const body = req.body;
+        console.log("lesson id ", body.lessonId)
+        res.json(await lessonController.delete(body));
+    } catch (err) {
+        return res.status(500).json({
+            mesaje: err.message
+        });
+    }
+});
+
 
 // ADD USER TO A LESSON
 router.post('/joinlesson', auth, async (req,res) => {

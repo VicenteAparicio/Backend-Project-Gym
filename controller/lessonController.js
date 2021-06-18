@@ -26,6 +26,12 @@ class Room {
             return Lesson.create(body);
         }
 
+        // DELETE LESSON
+        async delete(body){
+            let id = body.lessonId;
+            return Lesson.findByIdAndDelete({_id: id});
+        }
+
         async joinLesson(body){
             const id = body.id;
             const member = body.userId;
