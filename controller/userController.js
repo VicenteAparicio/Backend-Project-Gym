@@ -33,14 +33,14 @@ class Customer {
         return ({token, user});
     }
 
-// DISPLAY ALL MY LESSONS
-async allMyLessons(body){
-    let userId = body.userId;
-    console.log("El body con el id es",userId)
-    let res = await Lesson.find({members:userId}).populate("coaches").populate("members");
+    // DISPLAY ALL MY LESSONS
+    async allMyLessons(body){
+        let userId = body.userId;
+        console.log("El body con el id es",userId)
+        let res = await Lesson.find({members:userId}).populate("coaches").populate("members");
 
-    return res;
-}
+        return res;
+    }
 
     // MODIFY USER BY USER
     async modifyUser(body){

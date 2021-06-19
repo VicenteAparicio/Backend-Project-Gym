@@ -27,6 +27,7 @@ class Trainer {
         const payload = {
             coachId : coach.id,
             createAt : new Date,
+            isCoach : coach.isCoach,
             isAdmin : coach.isAdmin
         }
 
@@ -54,6 +55,8 @@ class Trainer {
         );
     }
 
+
+
     // DELETE COACH
     async delete(body){
         let id = body.id;
@@ -64,7 +67,7 @@ class Trainer {
     async allCoachs(){
         return Coach.find();
     }
-    
+
     // DISPLAY VALORATIONS
     async rate(id){
         let trainer = await Coach.findById(id);

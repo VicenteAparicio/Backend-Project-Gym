@@ -28,6 +28,19 @@ router.get('/usersLessons', auth, async (req, res) => {
     }
 });
 
+// DISPLAY COACH LESSONS
+router.post('/coachlessons', coach, async (req, res) => {
+    
+    try {
+        let body = req.body;
+        res.json(await lessonController.Coachlessons(body));
+    } catch (err) {
+        return res.status(500).json({
+            mesaje: err.message
+        });
+    }
+});
+
 // CREATE NEW LESSON
 router.post('/newlesson', coach, async (req, res) => {
     try {

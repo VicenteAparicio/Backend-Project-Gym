@@ -22,6 +22,15 @@ class Room {
             );
         }
 
+        // DISPLAY ALL MY LESSONS
+        async Coachlessons(body){
+            let coachId = body.coachId;
+            console.log("El body con el id es",coachId)
+            let res = await Lesson.find({coaches:coachId}).populate("coaches").populate("members");
+
+            return res;
+        }
+
         async newLesson(body){
             return Lesson.create(body);
         }
@@ -31,6 +40,8 @@ class Room {
             let id = body.lessonId;
             return Lesson.findByIdAndDelete({_id: id});
         }
+
+
 
         async joinLesson(body){
             const lessonId = body.lessonId;
