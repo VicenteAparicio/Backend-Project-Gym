@@ -37,13 +37,14 @@ class Trainer {
 
     // MODIFY COACH
     async modifyCoach(body){
-        return Coach.findByIdAndUpdate(
+        // body.password = await bcrypt.hashSync(body.password, 10);
+        console.log("al controller llega esto", body)
+        return Coach.findOneAndUpdate(
             {_id: body.id},
-            {   nick : body.nick,
-                name : body.name,
+            {   name : body.name,
+                email: body.email,
                 instagram: body.instagram,
                 birthdate : body.birthdate,
-                password : body.password,
                 level: body.level,
                 tasks: body.tasks,
                 special: body.special,

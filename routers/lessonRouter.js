@@ -44,7 +44,9 @@ router.post('/coachlessons', coach, async (req, res) => {
 // CREATE NEW LESSON
 router.post('/newlesson', coach, async (req, res) => {
     try {
+        console.log("llegamos a newlesson router")
         const body = req.body;
+        console.log(body)
         res.json(await lessonController.newLesson(body));
     } catch (err) {
         return res.status(500).json({

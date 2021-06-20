@@ -18,10 +18,6 @@ const lessonSchema = new Schema({
         type: String,
         required: true
     },
-    creationDate: {
-        type: Date,
-        required: true,
-    },
     members: [{
         type: mongoose.Schema.Types.ObjectId, ref:"User"
     }],
