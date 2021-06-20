@@ -102,7 +102,12 @@ class Customer {
     // FIND ALL ACTIVE USERS (ADMIN ONLY)
     async allActiveUsers(){
         return User.find({isActive:true});
-    }    
+    }
+
+    // FIND ALL COACHES (DUPLICATED)
+    async allCoachs(){
+        return Coach.find();
+    }
 }
 
 const userController = new Customer();
